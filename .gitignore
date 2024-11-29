@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# TypeScript output (if you don't use "outDir" in tsconfig.json)
+*.tsbuildinfo
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# IDE configurations
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Storybook build output
+storybook-static/
+
+# Optional: for temporary files created by editors or bundlers
+*.swp
