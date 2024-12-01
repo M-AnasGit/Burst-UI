@@ -1,3 +1,1 @@
-export const sayHello = (name: string) => `Hello, ${name}!`
-
-console.log(sayHello('world')) // Hello, world!
+export { ThemeProvider, useTheme } from './themeContext'

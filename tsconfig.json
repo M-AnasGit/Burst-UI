@@ -5,11 +5,12 @@
 		"outDir": "dist",
 		"strict": true,
 		"module": "ESNext",
-		"moduleResolution": "Node",
+		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"rootDir": "src",
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react-jsx",
+		"target": "ES6"
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules"]

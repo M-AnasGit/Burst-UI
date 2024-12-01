@@ -26,3 +26,5 @@ storybook-static/
 
 # Optional: for temporary files created by editors or bundlers
 *.swp
+
+*storybook.log
