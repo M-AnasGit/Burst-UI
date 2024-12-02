@@ -92,5 +92,9 @@ interface Theme {
         toggles: ComponentState;
         sliders: ComponentState;
         dropdowns: ComponentState;
+        spinners: ComponentState;
+        skeletons: ComponentState;
+        progress: ComponentState;
+        modals: ComponentState;
     };
 }

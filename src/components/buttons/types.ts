@@ -1,18 +1,11 @@
 type ButtonVariant = 'primary' | 'outline' | 'text';
 
-interface ButtonProps {
-    onClick: () => void;
+interface BaseButtonProps {
     children: React.ReactNode;
-    size?: sizes;
-    variant?: ButtonVariant;
-    loading?: boolean;
+    onClick: () => void;
     disabled?: boolean;
+    loading?: boolean;
     notifyText?: string;
     ariaLabel?: string;
-    active?: boolean;
-}
-
-interface ActionButtonProps extends ButtonProps {
-    width?: number | string;
-    height?: number | string;
+    size?: 'small' | 'medium' | 'large';
 }

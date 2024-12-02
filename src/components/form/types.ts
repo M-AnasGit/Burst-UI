@@ -33,12 +33,12 @@ interface FormProps {
 }
 
 interface InputProps extends FormProps {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
     options?: InputOptions;
 }
 
 interface TextAreaProps extends FormProps {
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => any;
     minRows: number;
     options?: TextAreaOptions;
 }
@@ -47,7 +47,7 @@ interface RadioGroupProps {
     name: string;
     options: RadioOptions[];
     selected: number;
-    onChange: (i: number) => void;
+    onChange: (i: number) => any;
     label?: string;
     disabled?: boolean;
     direction?: 'row' | 'column';
@@ -57,7 +57,7 @@ interface RadioGroupProps {
 
 interface CheckboxProps {
     value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
     label?: string;
     checked?: boolean;
     disabled?: boolean;
@@ -66,7 +66,7 @@ interface CheckboxProps {
 }
 
 interface UploadProps {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
     uploadText?: string;
     noUploadedText?: string;
     label?: string;
@@ -80,7 +80,7 @@ interface UploadProps {
 }
 
 interface ToggleProps {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
     label?: string;
     inline?: boolean;
     checked?: boolean;
@@ -93,7 +93,7 @@ interface SliderProps {
     value: number;
     min: number;
     max: number;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
     label?: string;
     ariaLabel?: string;
     readOnly?: boolean;
@@ -105,7 +105,7 @@ interface DropdownProps {
     name: string;
     options: string[];
     value: string | null;
-    onChange: (selected: string) => void;
+    onChange: (selected: string) => any;
     placeholder?: string;
     NoOptionsMessage?: string;
     defaultValue?: number | null;

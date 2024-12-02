@@ -63,7 +63,7 @@ const Option = styled.button<{ $size: sizes }>`
  * @example
  * const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
  *
- * <SingleDropdown
+ * <Dropdown
  *   name="fruits"
  *   options={['Apple', 'Banana', 'Cherry']}
  *   label="Select a Fruit"

@@ -1,17 +1,21 @@
 {
-	"compilerOptions": {
-		"declaration": true,
-		"declarationDir": "dist",
-		"outDir": "dist",
-		"strict": true,
-		"module": "ESNext",
-		"moduleResolution": "node",
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"jsx": "react-jsx",
-		"target": "ES6"
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules"]
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "dist",
+        "outDir": "dist",
+        "strict": true,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react-jsx",
+        "target": "ES6",
+        "baseUrl": "./src",
+        "paths": {
+            "@components/*": ["components/*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
 }

@@ -276,5 +276,106 @@ export const defaultTheme: Theme = {
                 },
             },
         },
+        spinners: {
+            sizes: {
+                small: '1rem',
+                medium: '1.5rem',
+                large: '2rem',
+            },
+            padding: {
+                small: '0.5rem',
+                medium: '0.625rem',
+                large: '0.75rem',
+            },
+            custom: {
+                speed: {
+                    slow: '1.5s',
+                    normal: '1s',
+                    fast: '0.5s',
+                },
+                borderWidth: {
+                    small: '2px',
+                    medium: '3px',
+                    large: '4px',
+                },
+            },
+        },
+        skeletons: {
+            padding: {
+                small: '1.5rem',
+                medium: '2rem',
+                large: '2.5rem',
+            },
+            custom: {
+                speed: {
+                    slow: '1.5s',
+                    normal: '1s',
+                    fast: '0.5s',
+                },
+            },
+        },
+        progress: {
+            padding: {
+                small: '0.5rem',
+                medium: '0.75rem',
+                large: '1rem',
+            },
+            radius: {
+                small: '0.5rem',
+                medium: '1rem',
+                large: '1.5rem',
+            },
+        },
+        modals: {
+            padding: {
+                small: '0.5rem ',
+                medium: '0.5rem ',
+                large: '0.75rem ',
+            },
+            radius: {
+                small: '0.25rem',
+                medium: '0.5rem',
+                large: '0.75rem',
+            },
+            sizes: {
+                small: '1rem',
+                medium: '1.5rem',
+                large: '1.75rem',
+            },
+            custom: {
+                darken: {
+                    low: 'rgba(0, 0, 0, 0.5)',
+                    medium: 'rgba(0, 0, 0, 0.75)',
+                    high: 'rgba(0, 0, 0, 0.9)',
+                },
+                blur: {
+                    low: 'blur(2px)',
+                    medium: 'blur(4px)',
+                    high: 'blur(6px)',
+                },
+                message: {
+                    warning: {
+                        background: '#FFF3CD',
+                        border: '#856404',
+                        text: '#FFC107',
+                    },
+                    error: {
+                        background: '#F8D7DA',
+                        border: '#721C24',
+                        text: '#DC3545',
+                    },
+                    success: {
+                        background: '#D4EDDA',
+                        border: '#155724',
+                        text: '#28A745',
+                    },
+                    info: {
+                        background: '#D1ECF1',
+                        border: '#0C5460',
+                        text: '#17A2B8',
+                    },
+                },
+            },
+        },
     },
 };
