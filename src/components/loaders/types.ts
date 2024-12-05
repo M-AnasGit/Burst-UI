@@ -40,18 +40,3 @@ type CustomCircle = BaseCustomModel & {
 type CustomBlock = BaseCustomModel & {
     type: 'block';
 };
-interface SpinnerProps {
-    size?: sizes;
-    label?: string;
-    isLabel?: boolean;
-    speed?: speed;
-    color?: string;
-    fillColor?: string;
-}
-
-interface SkeletonProps {
-    model?: models | CustomModel[];
-    color?: string;
-    speed: speed;
-    size?: sizes;
-}

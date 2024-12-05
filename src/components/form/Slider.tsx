@@ -1,123 +1,30 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import Label from '../utils/Label';
-
-import { Input } from './InputField';
-
+import { Input } from './Input';
+import {
+    FlexColumnWrapper,
+    SliderWrapper,
+    SliderLabel,
+    RangeLabel,
+    SliderContainer,
+    SliderProgress,
+    SliderThumb,
+} from './styles';
 import { useTheme } from '../../themeContext';
 
-const SliderLabel = styled(Label)<{ $disabled: boolean }>`
-    color: ${({ theme, $disabled }) =>
-        $disabled ? theme.colors.disabled : theme.colors.text};
-`;
-
-const RangeLabel = styled.span<{ $size: sizes; $disabled: boolean }>`
-    font-family: ${({ theme }) => theme.typography.fontFamily};
-    font-size: ${({ theme, $size }) => theme.typography.fontSize[$size]};
-    color: ${({ theme, $disabled }) =>
-        $disabled ? theme.colors.textDisabled : theme.colors.textSecondary};
-`;
-
-const SliderContainer = styled.div<{ $disabled: boolean; $size: sizes }>`
-    position: relative;
-    height: ${({ theme, $size }) => theme.components.sliders.sizes[$size]};
-    width: 100%;
-
-    background-color: ${({ theme, $disabled }) =>
-        $disabled
-            ? theme.colors.background.disabled
-            : theme.colors.background.normal};
-
-    border: 1px solid
-        ${({ theme, $disabled }) =>
-            $disabled
-                ? theme.colors.border.disabled
-                : theme.colors.border.normal};
-    border-radius: ${({ theme, $size }) =>
-        theme.components.sliders.radius[$size]};
-
-    cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-`;
-
-// prettier-ignore
-const SliderThumb = styled.div<{
-    $disabled: boolean;
-    $size: sizes;
+export interface SliderProps {
+    name: string;
     value: number;
     min: number;
     max: number;
-}>
-`
-    position: absolute;
-    top: ${({ theme, $size }) =>
-        `${theme.components.sliders.custom.thumb.positions.top[$size]}`};
-    left: ${({ value, min, max }) => `${((value - min) / (max - min)) * 100 - 0.5}%`};
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
+    label?: string;
+    ariaLabel?: string;
+    readOnly?: boolean;
+    disabled?: boolean;
+    size?: sizes;
+}
 
-    width: ${({ theme, $size }) =>
-        theme.components.sliders.custom.thumb.sizes[$size]};
-    height: ${({ theme, $size }) =>
-        theme.components.sliders.custom.thumb.sizes[$size]};
-
-    background-color: ${({ theme, $disabled }) =>
-        $disabled ? theme.colors.textDisabled : theme.colors.textPrimary};
-    border-radius: 50%;
-
-    transition: left ${({ theme }) => theme.transitions.xslow};
-`;
-
-// prettier-ignore
-const SliderProgress = styled.div<{
-    $disabled: boolean;
-    $size: sizes;
-    value: number;
-    min: number;
-    max: number;
-}>
-`
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    height: 100%;
-    width: ${({ value, min, max }) =>
-        `${((value - min) / (max - min)) * 100}%`};
-
-    background-color: ${({ theme, $disabled }) =>
-        $disabled ? theme.colors.textDisabled : theme.colors.textPrimary};
-    border-radius: ${({ theme, $size }) =>
-        theme.components.sliders.radius[$size]};
-`;
-
-/**
- * Slider component for selecting a value within a range.
- *
- * @param {Object} props - The component props.
- * @param {string} props.name - The name attribute for the slider.
- * @param {number} props.value - The current value of the slider.
- * @param {number} [props.min=0] - The minimum value of the slider.
- * @param {number} [props.max=100] - The maximum value of the slider.
- * @param {function} props.onChange - Function to handle value changes.
- * @param {string} [props.label] - Label text for the slider.
- * @param {string} [props.ariaLabel] - Aria label for accessibility.
- * @param {boolean} [props.readOnly=false] - Whether the slider is read-only.
- * @param {boolean} [props.disabled=false] - Whether the slider is disabled.
- * @param {('small'|'medium'|'large')} [props.size='small'] - Size of the slider.
- * @returns {JSX.Element} A slider component with optional label and input field.
- *
- * @example
- * const [value, setValue] = React.useState<number>(500);
- *
- * <Slider
- *   name="volume"
- *   value={value}
- *   min={0}
- *   max={1000}
- *   onChange={(e) => setValue(Number(e.target.value))}
- *   label="Volume"
- *   ariaLabel="Volume control"
- * />
- */
 export const Slider: React.FC<SliderProps> = ({
     name,
     value,
@@ -131,7 +38,7 @@ export const Slider: React.FC<SliderProps> = ({
     size = 'small',
 }: SliderProps) => {
     const { theme } = useTheme();
-    const [strVal, setStrVal] = React.useState<string>(value.toString());
+    const [strVal, setStrVal] = React.useState<string>(`${value}`);
     const handleLocalChange = React.useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             setStrVal(e.target.value);
@@ -150,19 +57,14 @@ export const Slider: React.FC<SliderProps> = ({
                 (offsetX / rect.width) * (max - min) + min,
             );
 
-            setStrVal(newValue.toString());
+            setStrVal(`${newValue}`);
             onChange({ target: { name, value: newValue } } as any);
         },
         [onChange],
     );
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-            }}
-        >
+        <FlexColumnWrapper>
             {label && (
                 <SliderLabel
                     htmlFor={name}
@@ -173,21 +75,13 @@ export const Slider: React.FC<SliderProps> = ({
                     {label}
                 </SliderLabel>
             )}
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginBottom: '0.5rem',
-                    gap: theme.spacing[`${size}`],
-                }}
-            >
+            <SliderWrapper $size={size} theme={theme}>
                 <RangeLabel $size={size} $disabled={disabled} theme={theme}>
                     {min}
                 </RangeLabel>
                 <Input
                     name={name}
-                    placeholder={value.toString()}
+                    placeholder={`${min}`}
                     value={strVal}
                     onChange={handleLocalChange}
                     options={{
@@ -201,7 +95,7 @@ export const Slider: React.FC<SliderProps> = ({
                 <RangeLabel $size={size} $disabled={disabled} theme={theme}>
                     {max}
                 </RangeLabel>
-            </div>
+            </SliderWrapper>
             <SliderContainer
                 $disabled={disabled}
                 $size={size}
@@ -225,6 +119,6 @@ export const Slider: React.FC<SliderProps> = ({
                     max={max}
                 />
             </SliderContainer>
-        </div>
+        </FlexColumnWrapper>
     );
 };

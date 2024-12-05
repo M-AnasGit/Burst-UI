@@ -1,76 +1,33 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { Button } from '../buttons/Button';
+import {
+    DropdownWrapper,
+    OptionsWrapper,
+    Option,
+    Required,
+    FlexColumnWrapper,
+    FlexRowWrapper,
+} from './styles';
 import Label from '../utils/Label';
 
 import { useTheme } from '../../themeContext';
 
-const OptionsContainer = styled.div<{ $size: sizes }>`
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    margin-top: 2px;
+export interface DropdownProps {
+    name: string;
+    options: string[];
+    value: string | null;
+    onChange: (selected: string) => any;
+    placeholder?: string;
+    NoOptionsMessage?: string;
+    defaultValue?: number | null;
+    label?: string;
+    ariaLabel?: string;
+    disabled?: boolean;
+    required?: boolean;
+    size?: sizes;
+}
 
-    max-height: ${({ theme, $size }) =>
-        theme.components.dropdowns.custom.height[$size]};
-    overflow: auto;
-
-    background-color: ${({ theme }) => theme.components.dropdowns.background};
-
-    border: 2px solid ${({ theme }) => theme.colors.border.normal};
-    border-radius: ${({ theme, $size }) =>
-        theme.components.dropdowns.radius[$size]};
-
-    padding: ${({ theme }) => theme.components.dropdowns.padding};
-
-    :first-child {
-        border-top: none;
-    }
-`;
-
-const Option = styled.button<{ $size: sizes }>`
-    background-color: ${({ theme }) => theme.colors.background.normal};
-    color: ${({ theme }) => theme.colors.textSecondary};
-
-    border: none;
-    border-top: 2px solid ${({ theme }) => theme.colors.border.normal};
-
-    padding: ${({ theme, $size }) => theme.components.dropdowns.padding[$size]};
-
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.background.hover};
-        color: ${({ theme }) => theme.colors.textPrimary};
-    }
-`;
-
-/**
- * SingleDropdown component for selecting a single option from a list.
- *
- * @param {Object} props - The component props.
- * @param {string} props.name - The name attribute for the dropdown.
- * @param {Array<string>} props.options - An array of options to select from.
- * @param {function} props.onChange - Function to handle value changes.
- * @param {string} [props.placeholder] - Placeholder text when no option is selected.
- * @param {string} [props.NoOptionsMessage] - Message to display when no options are available.
- * @param {number|null} [props.defaultValue=null] - The index of the default selected option.
- * @param {string} [props.label] - Label text for the dropdown.
- * @param {string} [props.ariaLabel] - Aria label for accessibility.
- * @param {boolean} [props.disabled=false] - Whether the dropdown is disabled.
- * @param {('small'|'medium'|'large')} [props.size='small'] - Size of the dropdown.
- * @returns {JSX.Element} A single dropdown component with options.
- *
- * @example
- * const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
- *
- * <Dropdown
- *   name="fruits"
- *   options={['Apple', 'Banana', 'Cherry']}
- *   label="Select a Fruit"
- *   value={selectedOption}
- *   onChange={(option) => setSelectedOption(option)}
- * />
- */
 export const Dropdown: React.FC<DropdownProps> = ({
     name,
     placeholder = 'Select an option',
@@ -92,39 +49,16 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }, [onChange]);
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-            }}
-        >
+        <FlexColumnWrapper>
             {label && (
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}
-                >
+                <FlexRowWrapper>
                     <Label $size={size} theme={theme} htmlFor={name}>
                         {label}
                     </Label>
-                    {required && (
-                        <span
-                            style={{ color: theme.colors.error, marginLeft: 4 }}
-                        >
-                            *
-                        </span>
-                    )}
-                </div>
+                    {required && <Required>*</Required>}
+                </FlexRowWrapper>
             )}
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: 'fit-content',
-                    maxWidth: '100%',
-                }}
-            >
+            <DropdownWrapper>
                 <Button
                     onClick={handleOpen}
                     size={size}
@@ -136,7 +70,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
                         : value || placeholder}
                 </Button>
                 {open && (
-                    <OptionsContainer $size={size} theme={theme}>
+                    <OptionsWrapper $size={size} theme={theme}>
                         {options.map((option, index) => (
                             <Option
                                 $size={size}
@@ -150,9 +84,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
                                 {option}
                             </Option>
                         ))}
-                    </OptionsContainer>
+                    </OptionsWrapper>
                 )}
-            </div>
-        </div>
+            </DropdownWrapper>
+        </FlexColumnWrapper>
     );
 };

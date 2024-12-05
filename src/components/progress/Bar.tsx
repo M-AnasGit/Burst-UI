@@ -1,54 +1,26 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import Label from '../utils/Label';
-
+import {
+    ProgressBarWrapper,
+    StyledProgressBarContainer,
+    StyledProgressBar,
+    ProgressLabel,
+} from './styles';
 import { useTheme } from '../../themeContext';
 
-const StyledProgressBar = styled.div<{ $size: string }>`
-    width: 100%;
+export interface ProgressProps {
+    start_at: number;
+    block_at: number;
+    progress_by: number;
+    progress_rate: number;
+    show_progress: boolean;
+    show_labels: boolean;
+    progress_labels: string[];
+    finished: boolean;
+    color?: string;
+    size?: sizes;
+}
 
-    background-color: ${({ theme }) => theme.colors.background.normal};
-
-    border: 1px solid ${({ theme }) => theme.colors.border.normal};
-    border-radius: ${({ theme, $size }) =>
-        theme.components.progress.radius[$size]};
-`;
-
-const ProgressLabel = styled(Label)`
-    text-align: center;
-    margin-bottom: 0;
-`;
-
-/**
- * Bar component for displaying progress.
- *
- * @param {Object} props - The component props.
- * @param {number} props.start_at - The starting value of the progress bar.
- * @param {number} props.block_at - The maximum value of the progress bar.
- * @param {number} props.progress_by - The increment value for each progress step.
- * @param {number} props.progress_rate - The rate of progress updates in milliseconds.
- * @param {boolean} props.show_progress - Whether to display the progress percentage.
- * @param {boolean} props.show_labels - Whether to display progress labels.
- * @param {string[]} props.progress_labels - Array of labels for different progress stages.
- * @param {boolean} props.finished - Whether the progress is complete.
- * @param {string} [props.color] - Custom color for the progress bar.
- * @param {'small'|'medium'|'large'} [props.size='small'] - Size of the progress bar.
- * @returns {JSX.Element} A styled progress bar component.
- *
- * @example
- * <ProgressBar
- *   start_at={0}
- *   block_at={100}
- *   progress_by={25}
- *   progress_rate={1000}
- *   show_progress={true}
- *   show_labels={true}
- *   progress_labels={['Start', 'Quarter', 'Half', 'Three Quarters', 'Complete']}
- *   finished={false}
- *   color="#007bff"
- * />
- */
 export const ProgressBar: React.FC<ProgressProps> = ({
     start_at,
     block_at,
@@ -105,56 +77,31 @@ export const ProgressBar: React.FC<ProgressProps> = ({
     ]);
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: theme.components.progress.padding
-                    ? theme.components.progress.padding[size]
-                    : '0.5rem',
-            }}
-        >
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    gap: theme.components.progress.padding
-                        ? theme.components.progress.padding[size]
-                        : '0.5rem',
-                }}
-            >
-                <StyledProgressBar $size={size} theme={theme}>
-                    <div
-                        style={{
-                            width: `${progress}%`,
-                            height: '100%',
-                            backgroundColor:
-                                color || theme.colors.background.active,
-                            borderRadius: `${
-                                theme.components.progress.radius
-                                    ? theme.components.progress.radius[size]
-                                    : '0.5rem'
-                            }`,
-                            transition: `width ${progress_rate / 2}ms ease-in-out`,
-                        }}
+        <ProgressBarWrapper $size={size} $direction="row" theme={theme}>
+            <ProgressBarWrapper $size={size} $direction="column" theme={theme}>
+                <StyledProgressBarContainer $size={size} theme={theme}>
+                    <StyledProgressBar
+                        $size={size}
+                        $progress={progress}
+                        $progress_rate={progress_rate}
+                        $color={color}
+                        theme={theme}
                         aria-valuenow={progress}
                         aria-valuemin={start_at}
                         aria-valuemax={block_at}
                     />
-                </StyledProgressBar>
+                </StyledProgressBarContainer>
                 {show_progress && (
                     <ProgressLabel $size={size} theme={theme}>
                         {progress}%
                     </ProgressLabel>
                 )}
-            </div>
+            </ProgressBarWrapper>
             {show_labels && (
                 <ProgressLabel $size={size} theme={theme}>
                     {currentLabel}
                 </ProgressLabel>
             )}
-        </div>
+        </ProgressBarWrapper>
     );
 };

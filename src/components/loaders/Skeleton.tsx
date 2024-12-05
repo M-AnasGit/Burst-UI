@@ -1,9 +1,15 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
 
 import models from './models';
 
 import { useTheme } from '../../themeContext';
+import {
+    SkeletonItemWrapper,
+    SkeletonBar,
+    SkeletonCircle,
+    SkeletonFlexWrapper,
+    SkeletonWrapper,
+} from './styles';
 
 interface SkeletonItemProps {
     item: CustomModel;
@@ -25,13 +31,9 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
     switch (item.type) {
         case 'text':
             return (
-                <div
-                    style={{
-                        display: 'flex',
-                        width: item.width,
-                        flexDirection: 'column',
-                        gap: item.spacing || '0.5rem',
-                    }}
+                <SkeletonItemWrapper
+                    $width={item.width}
+                    $spacing={item.spacing || '0.5rem'}
                 >
                     {Array.from({ length: item.lines }).map((_, i) => (
                         <SkeletonBar
@@ -43,7 +45,7 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
                             theme={theme}
                         />
                     ))}
-                </div>
+                </SkeletonItemWrapper>
             );
         case 'block':
             return (
@@ -69,20 +71,15 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
             );
         case 'flex-container':
             return (
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: item.direction || 'row',
-                        justifyContent: item.justify,
-                        alignItems: item.align,
-                        gap: theme.components.skeletons.padding
-                            ? theme.components.skeletons.padding[size]
-                            : '0.5rem',
-                        flexWrap: 'wrap',
-
-                        width: item.width,
-                        height: item.height,
-                    }}
+                <SkeletonFlexWrapper
+                    key={index}
+                    $size={size}
+                    $direction={item.direction}
+                    $justify={item.justify}
+                    $align={item.align}
+                    $width={item.width}
+                    $height={item.height}
+                    theme={theme}
                 >
                     {item.items.map((subItem, subIndex) => (
                         <SkeletonItem
@@ -94,7 +91,7 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
                             speed={speed}
                         />
                     ))}
-                </div>
+                </SkeletonFlexWrapper>
             );
         default:
             return (
@@ -108,59 +105,13 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
     }
 };
 
-const pulse = keyframes`
-    0% {
-        opacity: 0.5;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-    }
-`;
+export interface SkeletonProps {
+    model?: models | CustomModel[];
+    color?: string;
+    speed: speed;
+    size?: sizes;
+}
 
-// prettier-ignore
-const SkeletonSetting = styled.div<{
-    $width: string;
-    $height: string;
-    $color?: string;
-    $speed?: speed;
-}>
-`
-    width: ${({ $width }) => $width};
-    height: ${({ $height }) => $height};
-
-    background-color: ${({ theme, $color }) =>
-        $color ? $color : theme.colors.background.active};
-
-    animation: ${pulse}
-        ${({ theme, $speed }) =>
-            $speed ? theme.components.skeletons.custom.speed[$speed] : "1s"}
-        infinite;
-`;
-
-const SkeletonBar = styled(SkeletonSetting)`
-    border-radius: ${({ theme }) => theme.borderRadius.large};
-`;
-
-const SkeletonCircle = styled(SkeletonSetting)`
-    border-radius: 50%;
-`;
-
-/**
- * Skeleton component for displaying loading placeholders.
- *
- * @param {Object} props - The component props.
- * @param {models | CustomModel[]} [props.model='article'] - Predefined model or custom configuration for skeleton layout.
- * @param {sizes} [props.size='small'] - Size of the skeleton components.
- * @param {speed} [props.speed='normal'] - Animation speed of the skeleton.
- * @param {string} [props.color] - Custom color for the skeleton components.
- * @returns {JSX.Element} A skeleton loading placeholder component.
- *
- * @example
- * <Skeleton model="profile" size="medium" speed="fast" color="#e0e0e0" />
- */
 export const Skeleton: React.FC<SkeletonProps> = ({
     model = 'article',
     size = 'small',
@@ -177,16 +128,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
     }, [model]);
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                width: '100%',
-                flexDirection: 'column',
-                gap: theme.components.skeletons.padding
-                    ? theme.components.skeletons.padding[size]
-                    : '0.5rem',
-            }}
-        >
+        <SkeletonWrapper $size={size} theme={theme}>
             {chosenModel.map((item, index) => (
                 <SkeletonItem
                     key={index}
@@ -197,6 +139,6 @@ export const Skeleton: React.FC<SkeletonProps> = ({
                     speed={speed}
                 />
             ))}
-        </div>
+        </SkeletonWrapper>
     );
 };

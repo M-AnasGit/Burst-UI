@@ -10,6 +10,14 @@ type StoryProps = ButtonProps & {
 const meta: Meta<StoryProps> = {
     component: Button,
     tags: ['autodocs'],
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'A Button component with support for various sizes, types.',
+            },
+        },
+    },
     argTypes: {
         buttonText: {
             control: {
