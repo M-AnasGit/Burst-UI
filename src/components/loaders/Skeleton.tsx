@@ -34,6 +34,7 @@ const SkeletonItem: React.FC<SkeletonItemProps> = ({
                 <SkeletonItemWrapper
                     $width={item.width}
                     $spacing={item.spacing || '0.5rem'}
+                    theme={theme}
                 >
                     {Array.from({ length: item.lines }).map((_, i) => (
                         <SkeletonBar

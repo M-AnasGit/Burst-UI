@@ -126,7 +126,8 @@ export const StyledTextArea = styled.textarea<{
 `;
 
 // Dropdown Wrappers
-export const DropdownWrapper = styled(FlexColumnWrapper)`
+export const DropdownWrapper = styled.div`
+    position: absolute;
     width: 'fit-content';
     max-width: 100%;
 `;
@@ -155,7 +156,6 @@ export const OptionsWrapper = styled.div<{ $size: sizes }>`
 `;
 
 // Dropdown Components
-
 export const Option = styled.button<{ $size: sizes }>`
     background-color: ${({ theme }) => theme.colors.background.normal};
     color: ${({ theme }) => theme.colors.textSecondary};

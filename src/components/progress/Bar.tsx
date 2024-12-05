@@ -37,7 +37,10 @@ export const ProgressBar: React.FC<ProgressProps> = ({
 
     const [progress, setProgress] = React.useState<number>(start_at);
     const [currentLabel, setCurrentLabel] = React.useState<string>('');
-
+    const labelpointer = React.useMemo(
+        () => Math.ceil((100 - start_at) / progress_labels.length),
+        [start_at, progress_labels],
+    );
     React.useEffect(() => {
         const progressBar = setInterval(() => {
             setProgress((prevProgress) => {
@@ -47,11 +50,11 @@ export const ProgressBar: React.FC<ProgressProps> = ({
                         block_at - prevProgress,
                     );
                     const newProgress = prevProgress + increment;
-                    const labelIndex = Math.min(
-                        Math.ceil((newProgress - start_at) / progress_by),
-                        progress_labels.length - 1,
+                    const labelIndex = Math.floor(
+                        (newProgress - start_at) / labelpointer,
                     );
-                    setCurrentLabel(progress_labels[labelIndex]);
+                    labelIndex < progress_labels.length &&
+                        setCurrentLabel(progress_labels[labelIndex]);
                     return newProgress;
                 } else {
                     clearInterval(progressBar);
@@ -77,8 +80,8 @@ export const ProgressBar: React.FC<ProgressProps> = ({
     ]);
 
     return (
-        <ProgressBarWrapper $size={size} $direction="row" theme={theme}>
-            <ProgressBarWrapper $size={size} $direction="column" theme={theme}>
+        <ProgressBarWrapper $size={size} $direction="column" theme={theme}>
+            <ProgressBarWrapper $size={size} $direction="row" theme={theme}>
                 <StyledProgressBarContainer $size={size} theme={theme}>
                     <StyledProgressBar
                         $size={size}
@@ -91,6 +94,7 @@ export const ProgressBar: React.FC<ProgressProps> = ({
                         aria-valuemax={block_at}
                     />
                 </StyledProgressBarContainer>
+
                 {show_progress && (
                     <ProgressLabel $size={size} theme={theme}>
                         {progress}%

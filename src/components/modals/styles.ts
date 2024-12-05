@@ -31,7 +31,7 @@ export const Overlay = styled.div<{
 
 // Modal Wrappers
 export const TitleWrapper = styled.div<{ $size: sizes }>`
-    background-color: ${({ theme }) => theme.colors.background.active};
+    background-color: ${({ theme }) => theme.colors.background.hover};
     padding: ${({ theme, $size }) => theme.components.modals.padding[$size]};
     border-bottom: 1px solid ${({ theme }) => theme.colors.border.normal};
 `;
@@ -88,7 +88,7 @@ export const StyledTitle = styled.h1<{
     font-size: ${({ theme, $size }) => theme.components.modals.sizes[$size]};
     font-weight: bold;
 
-    color: ${({ theme }) => theme.colors.textPrimary};
+    color: ${({ theme }) => theme.colors.textSecondary};
 
     margin: 0;
 `;

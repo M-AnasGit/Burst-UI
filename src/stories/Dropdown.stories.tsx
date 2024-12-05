@@ -63,7 +63,18 @@ const meta: Meta = {
             setValue(selected);
         };
 
-        return <Dropdown {...args} value={value} onChange={onChange} />;
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    height: '20vh',
+                    margin: '0',
+                }}
+            >
+                <Dropdown {...args} value={value} onChange={onChange} />;
+            </div>
+        );
     },
 };
 

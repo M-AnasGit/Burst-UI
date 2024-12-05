@@ -27,28 +27,6 @@ export default {
             type: 'block',
         } as CustomBlock,
         {
-            width: '100%',
-            height: '12px',
-            type: 'flex-container',
-            justify: 'space-between',
-            align: 'center',
-            direction: 'row',
-            items: [
-                {
-                    width: '50%',
-                    height: '12px',
-                    type: 'text',
-                    lines: 1,
-                } as CustomText,
-                {
-                    width: '20%',
-                    height: '12px',
-                    type: 'text',
-                    lines: 1,
-                } as CustomText,
-            ],
-        } as CustomFlexContainer,
-        {
             width: '45%',
             height: '12px',
             type: 'text',
