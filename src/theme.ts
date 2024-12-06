@@ -377,5 +377,58 @@ export const defaultTheme: Theme = {
                 },
             },
         },
+        feedbacks: {
+            padding: {
+                small: '0.5rem ',
+                medium: '0.5rem ',
+                large: '0.75rem ',
+            },
+            radius: {
+                small: '0.25rem',
+                medium: '0.5rem',
+                large: '0.75rem',
+            },
+            sizes: {
+                small: '1.5rem',
+                medium: '2rem',
+                large: '2.5rem',
+            },
+            custom: {
+                colors: {
+                    warning: {
+                        background: '#FFF3CD',
+                        border: '#856404',
+                        text: '#FFC107',
+                    },
+                    error: {
+                        background: '#F8D7DA',
+                        border: '#721C24',
+                        text: '#DC3545',
+                    },
+                    success: {
+                        background: '#D4EDDA',
+                        border: '#155724',
+                        text: '#28A745',
+                    },
+                    info: {
+                        background: '#D1ECF1',
+                        border: '#0C5460',
+                        text: '#17A2B8',
+                    },
+                },
+                fontSizes: {
+                    title: {
+                        small: '1rem',
+                        medium: '1.25rem',
+                        large: '1.5rem',
+                    },
+                    message: {
+                        small: '0.75rem',
+                        medium: '1rem',
+                        large: '1.25rem',
+                    },
+                },
+            },
+        },
     },
 };
