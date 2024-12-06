@@ -1,4 +1,4 @@
-import { Feedback, FeedbackProps } from '../components/Feedback/Feedback';
+import { Feedback, FeedbackProps } from '../components/feedback/Feedback';
 import { Meta, StoryObj } from '@storybook/react';
 
 type StoryProps = FeedbackProps;

@@ -96,6 +96,7 @@ interface Theme {
         skeletons: ComponentState;
         progress: ComponentState;
         modals: ComponentState;
+        drawers: ComponentState;
         feedbacks: ComponentState;
     };
 }

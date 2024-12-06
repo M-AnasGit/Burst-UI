@@ -326,6 +326,12 @@ export const defaultTheme: Theme = {
                 large: '1.5rem',
             },
         },
+        drawers: {
+            lightshadow:
+                '0rem 0.125rem 0.1875rem -0.0625rem rgba(0, 0, 0, 0.1), 0rem 0.0625rem 0rem 0rem rgba(25,28,33,0.02), 0rem 0rem 0rem 0.0625rem rgba(25,28,33,0.08)',
+            darkshadow:
+                '0rem 0.125rem 0.1875rem -0.0625rem rgba(0, 0, 0, .2), 0.0625rem 0.0625rem 0.0625rem rgba(25,28,33,.04), 0.0625rem 0.0625rem 0.0625rem rgba(25,28,33,.12)',
+        },
         modals: {
             padding: {
                 small: '0.5rem ',
@@ -344,9 +350,9 @@ export const defaultTheme: Theme = {
             },
             custom: {
                 darken: {
-                    low: 'rgba(0, 0, 0, 0.5)',
-                    medium: 'rgba(0, 0, 0, 0.75)',
-                    high: 'rgba(0, 0, 0, 0.9)',
+                    low: 'rgba(0, 0, 0, 0.25)',
+                    medium: 'rgba(0, 0, 0, 0.35)',
+                    high: 'rgba(0, 0, 0, 0.45)',
                 },
                 blur: {
                     low: 'blur(2px)',
