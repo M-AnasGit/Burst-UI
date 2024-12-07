@@ -83,6 +83,10 @@ interface Theme {
         slow: string;
         xslow: string;
     };
+    shadows: {
+        light: string;
+        dark: string;
+    };
     components: {
         buttons: ComponentState;
         inputs: ComponentState;

@@ -18,10 +18,17 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
     children,
     ActiveDrawer,
     overlayType = 'darken',
-    overlayRoughness = 'medium',
+    overlayRoughness = 'low',
     onOverlayClick = () => {},
 }: DrawerContainerProps) => {
     const { theme } = useTheme();
+
+    const handleDrawerClick = React.useCallback(
+        (event: React.MouseEvent) => {
+            event.stopPropagation();
+        },
+        [ActiveDrawer],
+    );
 
     return (
         <Overlay
@@ -33,8 +40,12 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
             role="dialog"
             aria-modal="true"
         >
-            {React.cloneElement(ActiveDrawer as React.ReactElement, { isOpen })}
-            {children}
+            <div onClick={handleDrawerClick}>
+                {React.cloneElement(ActiveDrawer as React.ReactElement, {
+                    isOpen,
+                })}
+                {children}
+            </div>
         </Overlay>
     );
 };

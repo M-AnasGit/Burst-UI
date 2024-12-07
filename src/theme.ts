@@ -96,9 +96,9 @@ export const defaultTheme: Theme = {
     },
 
     borderRadius: {
-        small: '0.125rem',
-        medium: '0.25rem',
-        large: '0.5rem',
+        small: '0.5rem',
+        medium: '0.75rem',
+        large: '1rem',
     },
 
     breakpoints: {
@@ -114,6 +114,11 @@ export const defaultTheme: Theme = {
         medium: '0.125s ease',
         slow: '0.1875s ease',
         xslow: '0.3125s ease',
+    },
+
+    shadows: {
+        light: '0rem 0.125rem 0.1875rem -0.0625rem rgba(0, 0, 0, 0.1), 0rem 0.0625rem 0rem 0rem rgba(25,28,33,0.02), 0rem 0rem 0rem 0.0625rem rgba(25,28,33,0.08)',
+        dark: '0rem 0.125rem 0.1875rem -0.0625rem rgba(0, 0, 0, .2), 0.0625rem 0.0625rem 0.0625rem rgba(25,28,33,.04), 0.0625rem 0.0625rem 0.0625rem rgba(25,28,33,.12)',
     },
 
     components: {
